@@ -6,7 +6,27 @@ Miscellaneous practical macroeconometric models and tools in analysing yield cur
 
 #### 1.1 Exchange Rate
 **Interest rate parity:**
-under the assumption of **capital mobility** and **perfect substitutability** of demostic and foreign assets.  
+under the assumption of **capital mobility** and **perfect substitutability** of demostic and foreign assets.
+**uncovered:**
+$$
+C_t \times (1+i_{A}) = \frac {C_t \times E({ER}_{t+k})\times(1+i_B)}{{ER}_t},
+$$
+or
+$$
+(1+i_{A}) = \frac {E({ER}_{t+k})}{{ER}_t}\times(1+i_B)
+$$
+where $i_A$ and $i_B$ are risk free rates in country A and B, ${ER}_t$ is the exchange rate from currency $A$ to $B$ at time $t$, $E()$ is expectation.
+**covered:**
+$$
+(1+i_{A}) = \frac {F_t}{{ER}_t}\times(1+i_B),
+$$
+$F_t$ is the forward exchange rate at time $t$.
+
+An approximated version:
+$$
+i_A = i_B + \frac {\Delta E({ER}_{t+k})} {{ER}_t},
+$$
+where $\frac {\Delta E({ER}_{t+k})} {{ER}_t}$ is the expected rete of deprecation of currency $A$.
 
 ### 2. Macroecomic indicators nowcasting
 Important macroecomic indicatorys like GDP and CPI are always released with a substantial delay. As a matter of fact, many indicators with much more higer frequency made it possible to get a early picture of the evolution fo current economic state. Here are several methods can bridge the gap bewteen timely updated indicators and the delayed natioanal accounts.
