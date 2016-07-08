@@ -91,6 +91,14 @@ embedded
 investment horizon
 term in years
 
+```mermaid
+graph TD;
+Term;SwapRate\ParRate;DiscountFactor;SpotRate;
+h(Forward Rate);
+
+
+```
+
 ##### 3.1.2 Performance Analysis on Yield Curves
 keywords:
 **measure convensions:** returns, spreads and yields
@@ -107,9 +115,10 @@ $$
 **Yield to Maturity**
 yield to maturity equals par rate when spot price equals par value.
 
-<span style="color: green">**coupon effect: **for yield is a complex average of all the spot rates of all the cash flows to the bonds' maturity, If the yields curves are positively sloped, a fairly priced zero coupon bond's yield(equals to it's spot rate) is higher than a coupon bond's yield with the same maturity. The implacation of this effect is that yield is not a reliable measure of relative value.</span>
+<span style="color: steelblue">**coupon effect: **for yield is a complex average of all the spot rates of all the cash flows to the bonds' maturity, If the yields curves are positively sloped, a fairly priced zero coupon bond's yield(equals to it's spot rate) is higher than a coupon bond's yield with the same maturity. The implacation of this effect is that yield is not a reliable measure of relative value.</span>
 
 P&L Decompostion
+**Price Appreciation**
 **Cash Carry**
 **Carry Roll Down**
 
