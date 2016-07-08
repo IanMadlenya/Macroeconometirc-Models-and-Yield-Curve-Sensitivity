@@ -2,7 +2,7 @@
 Miscellaneous practical macroeconometric models and tools in analysing yield curve.
 
 - - -
-### 1. Logics
+### 1. Basics
 
 #### 1.1 Exchange Rate
 **Interest rate parity:**
@@ -70,3 +70,52 @@ $I_{\tau,t}$ is the t-th month's high frequency indicor vector of quarter $\tau$
 Parigi G, Schlitzer G. Quarterly forecasts of the italian business cycle by means of monthly economic indicators[J]. Journal of Forecasting, 1995, 14(2):117–141.
 
 
+### 3. Bond Portfolio Logics
+
+#### 3.1 Yield Curve
+
+##### 3.1.1 Types of Yield Curves
+keywords:
+**quote convensions:** spot, forward and par rates
+
+**Curve of discount: ** $d(t)$ gives the present values of one unit of currency to be received at various time t.
+$$
+C_{present} = D_{t_1}d(t_1) + D_{t_2}d(t_2) + D_{t_3}d(t_3)+...+ D_{t_n}d(t_n)
+$$
+**Spot rate** is the rate on a **spot** loan, **coumound spot rate is the inverse of d(t)**
+$$
+r_{spot}= \frac{1}{d(t)^{\frac{1}{t}}}-1
+$$
+like discount factor, spot rate are calculated ==**recursively**==
+embedded
+investment horizon
+term in years
+
+##### 3.1.2 Performance Analysis on Yield Curves
+keywords:
+**measure convensions:** returns, spreads and yields
+
+**Returns** have to account for **intermediate cash flows(with reinvestment and financing cost)** and are often computed both on a gross basis and net of(deduct) financing.
+$$
+r_{realized}=\frac {D_{t_1}\times(1+r_{reinvest_1})^{T-t_1} + 
+D_{t_2}\times(1+r_{reinvest_2})^{T-t_2}+...+
+D_{t_n}\times(1+r_{reinvest_n})^{T-t_n} - C\times(1+r_{financing})^T
+} {C}
+$$
+**Spread** is essential for **relative value** and their convergence or divergence is an important source of return(spread will be analysised in detail in chapter 3.2).
+
+**Yield to Maturity**
+yield to maturity equals par rate when spot price equals par value.
+
+<span style="color: green">**coupon effect: **for yield is a complex average of all the spot rates of all the cash flows to the bonds' maturity, If the yields curves are positively sloped, a fairly priced zero coupon bond's yield(equals to it's spot rate) is higher than a coupon bond's yield with the same maturity. The implacation of this effect is that yield is not a reliable measure of relative value.</span>
+
+P&L Decompostion
+**Cash Carry**
+**Carry Roll Down**
+
+
+##### 3.1.3 Risk Analysis on Yield Curves
+
+#### 3.2 Profit Sources
+##### 3.2.1 Credit Spread
+##### 3.3.2 Yield Spread
