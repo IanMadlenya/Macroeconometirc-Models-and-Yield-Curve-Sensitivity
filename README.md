@@ -74,6 +74,13 @@ Parigi G, Schlitzer G. Quarterly forecasts of the italian business cycle by mean
 
 #### 3.1 Yield Curve
 
+**Instruments:**
++ **Forward forward(forward loan):** an agreement between two parties to engage in a loan transaction in the future. The lender agrees to lend the borrower funds on a specified future date. The borrower agrees to repay the loan, plus a premium, at a date beyond the loan issue date.
+example: a 10000 6-month loan, 10 years forward = a 10000 loan made in 10 ten years for 6 months = the lender give 10000 to the borrower 10 years later,  the brower repay the loan 6 months after the payment(i.e. 10.5 years).
++ **Premium/Discount bond: ** a coupon bond that is trading above/below its par value(when its coupon rate is higher/lower than the **prevailing interest rate**)
++ **Par bond: ** a coupon bond trade at par.
+
+
 ##### 3.1.1 Types of Yield Curves
 keywords:
 **quote convensions:** spot, forward and par rates
@@ -93,10 +100,7 @@ term in years
 
 ```mermaid
 graph TD;
-Term;SwapRate\ParRate;DiscountFactor;SpotRate;
-h(Forward Rate);
-
-
+Term;SwapRate\ParRate;DiscountFactor;SpotRate;ForwardRate
 ```
 
 ##### 3.1.2 Performance Analysis on Yield Curves
@@ -118,9 +122,11 @@ yield to maturity equals par rate when spot price equals par value.
 <span style="color: steelblue">**coupon effect: **for yield is a complex average of all the spot rates of all the cash flows to the bonds' maturity, If the yields curves are positively sloped, a fairly priced zero coupon bond's yield(equals to it's spot rate) is higher than a coupon bond's yield with the same maturity. The implacation of this effect is that yield is not a reliable measure of relative value.</span>
 
 P&L Decompostion
+<span style="color: darkred">**essential: intermediate term structure**</span>
 **Price Appreciation**
-**Cash Carry**
-**Carry Roll Down**
+**Roll Down: ** the profit or lose due to the fact that, as a security matures, its cash flows are priced at earlier points on the term structure(for example a forward loan or an european option).
+**Cash Carry: ** ${cash\ carry}={coupon\ income}- {financing\ cost}$
+**Carry Roll Down: ** P&L that might otherwise be classified as either carry or roll-down, ${carry\ roll\ down}={P\&L\ due\ to\ the\ passage\ of\ time}-{cash\ carry}$
 
 
 ##### 3.1.3 Risk Analysis on Yield Curves
