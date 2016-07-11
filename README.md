@@ -81,7 +81,7 @@ example: a 10000 6-month loan, 10 years forward = a 10000 loan made in 10 ten ye
 + **Par bond: ** a coupon bond trade at par.
 
 
-##### 3.1.1 Types of Yield Curves
+##### 3.1.1 Types of (<span style="color: darkred">EXPECTED</span>) Yield Curves
 keywords:
 **quote convensions:** spot, forward and par rates
 
@@ -92,6 +92,13 @@ $$
 **Spot rate** is the rate on a **spot** loan, **coumound spot rate is the inverse of d(t)**
 $$
 r_{spot}= \frac{1}{d(t)^{\frac{1}{t}}}-1
+$$
+**Forward rate** is the rate of a **forward loan**. a 1-period loan, $t-1$ periods forward
+$$
+(1+r_{forwrd})=\frac {d_{t-1}} {d_t}
+$$
+$$
+(1+r_{spot})^t=\prod_{i=0}^{t-1} (1+r_{forward_{t-i}})
 $$
 like discount factor, spot rate are calculated ==**recursively**==
 embedded
@@ -121,15 +128,32 @@ yield to maturity equals par rate when spot price equals par value.
 
 <span style="color: steelblue">**coupon effect: **for yield is a complex average of all the spot rates of all the cash flows to the bonds' maturity, If the yields curves are positively sloped, a fairly priced zero coupon bond's yield(equals to it's spot rate) is higher than a coupon bond's yield with the same maturity. The implacation of this effect is that yield is not a reliable measure of relative value.</span>
 
-P&L Decompostion
-<span style="color: darkred">**essential: intermediate term structure**</span>
-**Price Appreciation**
-**Roll Down: ** the profit or lose due to the fact that, as a security matures, its cash flows are priced at earlier points on the term structure(for example a forward loan or an european option).
-**Cash Carry: ** ${cash\ carry}={coupon\ income}- {financing\ cost}$
-**Carry Roll Down: ** P&L that might otherwise be classified as either carry or roll-down, ${carry\ roll\ down}={P\&L\ due\ to\ the\ passage\ of\ time}-{cash\ carry}$
+<span style="color: steelblue">**Also, spot rate is a geometric mean of forward rate**</span>
 
+P&L Decompostion
+#### <span style="color: darkred">**Essential: intermediate term structure**</span>
+
+**Total Price Appreciation** 
+$$P_{t+1}(R_{t+1},S_{t+1})-P_{t}(R_{t},S_{t})$$
+**Roll Down: ** the profit or lose due to the fact that, as a security **matures**, its cash flows are priced at earlier points on the term structure(for example a forward loan or an european option).
+**Cash Carry: ** ${cash\ carry}={coupon\ income}- {financing\ cost}$
+**Carry Roll Down: ** P&L that might otherwise be classified as either carry or roll-down, ${carry\ roll\ down}={P\&L\ due\ to\ the\ passage\ of\ time}-{cash\ carry}$, or the price appreciation due to the bond's maturing over the period and retes moving from the ofiginal term structure $R_t$ to some hypothetical,'expected',or intermediate term structure $R_{t+1}^e$
+$$P_{t+1}(R_{t+1}^e,S_{t})-P_{t}(R_{t},S_{t})$$
+**Rate Change**
+$$P_{t+1}(R_{t+1},S_{t})-P_{t}(R_{t+1}^e,S_{t})$$
+**Spread Chnage**
+$$P_{t+1}(R_{t+1},S_{t+1})-P_{t}(R_{t+1},S_{t})$$
+<span style="color: steelblue">clearly, **adding carry-roll-down, rate-change and spread-change together will get total-price-appreciation**</span>
+
+spread fixed
+calculate in advance
+too cheap
+too expensive
+
+fall/rise in parallel
 
 ##### 3.1.3 Risk Analysis on Yield Curves
+interest rate factor
 
 #### 3.2 Profit Sources
 ##### 3.2.1 Credit Spread
