@@ -158,3 +158,27 @@ interest rate factor
 #### 3.2 Profit Sources
 ##### 3.2.1 Credit Spread
 ##### 3.3.2 Yield Spread
+
+#### 3.3 Tools and Models
+
+##### interpolation
+**lineawr interpolation**
+**Cubic Spline**
+[spline](https://en.wikipedia.org/wiki/Spline_interpolation) was a term for elastic rulers that were bent to pass through a number of predefined points ("knots"). The approach to mathematically model the shape of such elastic rulers fixed by n + 1 knots $\{(x_i,y_i),i=0,1,...,n\}$is to interpolate between all the pairs of knots ${(x_{i-1},y_{i-1})}$ and $(x_{i},y_{i})$ with polynomials $ y=q_{i}(x),i=1,2,\cdots ,n$.
+$q_i(x)$ satisfies the form
+$$
+q_i(x)=P_1y_{i-1}+P_2y_{i}+P_3k_{i-1}+P_4k_{i}.
+$$
+Where $P_j,j=1,2,3,4$ are **basis functions**, different forms of $P_j$ result in different types of cubic spline(e.g. cubic spline, hermit cubic spline, monotonic cubic spline), the **only difference between cubic spline methods is the from of** $P_j$.  $k_{i-1}$ and $k_i$ are the tangent values at the knots of the $i_{th}$spline. **The goal of any spline method is to find each knot's tangent value ** $k_i,i=0,1,...,n$ **by some prespecified conditions**, once all $k_i$ are known, the interpolation polynomial is set.
+For a polynominal to be smooth, a continuous second derivative is required. That is
+$$
+q_{i+1}''(x)=q_i''(x),i=1,...,n-1.
+$$
+This condition will generate $n-1$ equations, but we have $n+1$  $k_i$s. Two more equations are needed to get all $k_i$s. For the elastic rulers being the model for the spline interpolation one has that to the left of the left-most "knot" and to the right of the right-most "knot" the ruler can move freely and will therefore take the form of a straight line with $q′′ = 0$. One gets that for **Natural Spline** conditions in addition to the previous $n-1$ equations:
+$$
+q_0''(x)=0, \\
+q_n''(x)=0.
+$$
+Eventually, conditions above constitute $n+1$ linear euqations with $n+1$ unkonwn varibles.
+**[Monotonic Hermit Spline](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation)**
+As to Monotonic Hermit Spline, the conditions needed to find $k_i$s are a little different, for the constrains on second derivitives may not hold under monotonic condition. Hence it is needed to specify all the tangents **manually**.
