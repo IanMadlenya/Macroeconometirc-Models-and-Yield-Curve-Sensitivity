@@ -153,7 +153,15 @@ too expensive
 fall/rise in parallel
 
 ##### 3.1.3 Risk Analysis on Yield Curves
-interest rate factor
+Yield curve can be decomposed in to several interest rate factors, these factors can be as simple as "level" and "slope", or as complex as every point on the curve is a factor(not decomposed at all)
+
+conves concave 
+
+DV01: dollar value change of one basis point change.
+$$
+DV01=\frac{\Delta P}{10000\times\Delta y} = \frac{1}{10000}\frac{dP}{dy},
+$$
+where $dy$ is the rate change **in basis points**, $dP$ is the price change in dollars.
 
 #### 3.2 Profit Sources
 ##### 3.2.1 Credit Spread
@@ -162,8 +170,8 @@ interest rate factor
 #### 3.3 Tools and Models
 
 ##### interpolation
-**lineawr interpolation**
-**Cubic Spline**
+**linear interpolation**
+**Cubic spline**
 [spline](https://en.wikipedia.org/wiki/Spline_interpolation) was a term for elastic rulers that were bent to pass through a number of predefined points ("knots"). The approach to mathematically model the shape of such elastic rulers fixed by n + 1 knots $\{(x_i,y_i),i=0,1,...,n\}$is to interpolate between all the pairs of knots ${(x_{i-1},y_{i-1})}$ and $(x_{i},y_{i})$ with polynomials $ y=q_{i}(x),i=1,2,\cdots ,n$.
 $q_i(x)$ satisfies the form
 $$
@@ -181,4 +189,4 @@ q_n''(x)=0.
 $$
 Eventually, conditions above constitute $n+1$ linear euqations with $n+1$ unkonwn varibles.
 **[Monotonic Hermit Spline](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation)**
-As to Monotonic Hermit Spline, the conditions needed to find $k_i$s are a little different, for the constrains on second derivitives may not hold under monotonic condition. Hence it is needed to specify all the tangents **manually**.
+As to Monotonic Hermit Spline, the conditions needed to find $k_i$s are a little different, for the constrains on second derivitives may not hold under monotonic condition. It is needed to specify all the tangents **manually**.
