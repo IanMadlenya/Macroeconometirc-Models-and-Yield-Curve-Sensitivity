@@ -155,13 +155,35 @@ fall/rise in parallel
 ##### 3.1.3 Risk Analysis on Yield Curves
 Yield curve can be decomposed in to several interest rate factors, these factors can be as simple as "level" and "slope", or as complex as every point on the curve is a factor(not decomposed at all)
 
-conves concave 
+#### <span style="color: darkred">**Essential: price-rate curve**</span>
+convex: straight line lies above the curve.
+concave: stratght line lies below the curve.
 
-DV01: dollar value change of one basis point change.
+**DV01**: **dollar value change** of one basis point rate change.
 $$
 DV01=\frac{\Delta P}{10000\times\Delta y} = \frac{1}{10000}\frac{dP}{dy},
 $$
 where $dy$ is the rate change **in basis points**, $dP$ is the price change in dollars.
+
+**Duration**: **percentage change** in the value of the security of one unit change in rates.
+$$
+D=\frac{-1}{P} \frac{dP}{dy}, \ or\\
+\frac{\Delta P}{P} = -D\Delta y .
+$$
+For example, if the rate change m basis points, Duration is D, then price change -D\*m basis points.
+
+**convexity:** measure interest rate sensitivity changes with the level of rates(sensitivity of the price sensitivity of rate change).
+$$
+C=\frac{1}{P} \frac{d^2P}{dy^2}
+$$
+when concexity is positive, the security is said to have positive sensitivity. Graphically this means that its price-rate is convex(i.e. its DV01 or duration fall as rates increase).
+
+A second-order Taylor approximation of the price-rate function with respect to rates:
+$$
+P(y+\Delta y)=P(y)+\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2}, or \\
+\Delta y = P(y+\Delta y)-P(y)=\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2} .
+$$
+
 
 #### 3.2 Profit Sources
 ##### 3.2.1 Credit Spread
