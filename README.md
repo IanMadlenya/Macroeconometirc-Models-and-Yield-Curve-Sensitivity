@@ -156,12 +156,18 @@ fall/rise in parallel
 Yield curve can be decomposed in to several interest rate factors, these factors can be as simple as "level" and "slope", or as complex as every point on the curve is a factor(not decomposed at all)
 
 #### <span style="color: darkred">**Essential: price-rate curve**</span>
+![](./references/price_rate_curve.png)
 convex: straight line lies above the curve.
 concave: stratght line lies below the curve.
+**01** represents .01%, i.e. one basis point. (DV01, key-rates 01, ...)
 
+##### Single risk factor
+Risk factor :
+$$y$$
+usually yield rate is taken as risk factor $y$.
 **DV01**: **dollar value change** of one basis point rate change.
 $$
-DV01=\frac{\Delta P}{10000\times\Delta y} = \frac{1}{10000}\frac{dP}{dy},
+DV01=\frac{-\Delta P}{10000\times\Delta y} = \frac{-1}{10000}\frac{dP}{dy},
 $$
 where $dy$ is the rate change **in basis points**, $dP$ is the price change in dollars.
 
@@ -180,9 +186,39 @@ when concexity is positive, the security is said to have positive sensitivity. G
 
 A second-order Taylor approximation of the price-rate function with respect to rates:
 $$
-P(y+\Delta y)=P(y)+\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2}, or \\
-\Delta y = P(y+\Delta y)-P(y)=\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2} .
+P(y+\Delta y)=P(y)+\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2}\Delta y^2, or \\
+\Delta y = P(y+\Delta y)-P(y)=\frac{dP}{dy}\Delta y + \frac{1}{2}\frac{d^2P}{dy^2} \Delta y^2, or\\
+\frac{\Delta P}{P}=-D\Delta y +\frac{1}{2}C\Delta y^2.
 $$
+As from the third equation, **convexity is an exposure to volatility**. <span style="color: darkred">A portfolio with higher convexity is to long the volatility, for $\Delta y^2$ will rise with volatility, and a larger cnvexity will contribute more to the proportion of value.</span>
+
+The value of a portfolio equals the sum of the **value** of the individual securities in the portfolio:
+$$
+P=\sum P_i,
+$$
+where$P_i$ is the $i_{th}$ securities' value. There's a simple relation between each securities' risk measure and the portfolio.
+$$
+DV01=\sum DV01 \\
+D=\sum \frac{P_i}{P}D_i \\
+C=\sum \frac{P_i}{P}C_i
+$$
+
+the reason multiplying a $\frac{1}{(1+y)}$ with $\frac{dP}{dy}$ is to make the $t-1$th power be $t$ aggain, then duration can be seen as a weighted(**weights are determined by the proportion of the cash flows to the total present value**) sum of all the cash folow time duration.
+$$duration \propto maturity \\
+convexity \propto {maturity}^2 \propto {duration}^2$$
+If barbell portfolio A consists of two bonds with duration $d_1$ and $d_2$, portfolio B is a bullet portfolio with duration $d_3$. from the duration relations between securitie and portfolio, $d_1,d_2,d_3$ satisfy:
+$$
+wd_1+(1-w)d_2=d_3,
+$$
+then it's easy to proof that the following equation must hold:
+$$
+wd_1^2 + (1-w)d_2^2>d_3^2.
+$$
+i.e. **A barbell portfolio will have a larger convexity than and a bullet portfolio with the same duration**. If future interest rate is highly volatile, barbell is preferred than bullet, vise versa.
+##### Multiple risk factors
+steepen: shorter-term rates fall **by** more than longer-term rates, or longer-term rates increase by more than shorter-term rates.
+flatten: shorter-term rates increase by more than longer-term rates, or longer-term rates fall by more than shorter-term rates.
+though graphically the curve may not seen as 'flatten' or 'steepen'.
 
 
 #### 3.2 Profit Sources
@@ -192,6 +228,7 @@ $$
 #### 3.3 Tools and Models
 
 ##### interpolation
+![](./references/yield_curve_interpolation.png)
 **linear interpolation**
 **Cubic spline**
 [spline](https://en.wikipedia.org/wiki/Spline_interpolation) was a term for elastic rulers that were bent to pass through a number of predefined points ("knots"). The approach to mathematically model the shape of such elastic rulers fixed by n + 1 knots $\{(x_i,y_i),i=0,1,...,n\}$is to interpolate between all the pairs of knots ${(x_{i-1},y_{i-1})}$ and $(x_{i},y_{i})$ with polynomials $ y=q_{i}(x),i=1,2,\cdots ,n$.

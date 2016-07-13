@@ -83,3 +83,12 @@ plot(x,y,xlab = "Term(years)",ylab = "Yield(%)",main = "Treasury Bond Yield Curv
 lines(x_inter,LI(x,y,x_inter),lty=3)
 lines(x_inter,MCHS(x,y,x_inter),col = "steelblue")
 lines(x_inter,MCHS(x,y,x_inter,mono = TRUE),col = "darkorange")
+
+legend(x=35,y=2.5,legend = c("origin","linear","cubic","monotonic"),pch = c(1,NA,NA,NA),lty = c(NA,3,1,1),col = c("black","black","steelblue","darkorange"),bty = "n") #bty: legend box line type, "o" for wrap and "n" for no wrap.
+
+y[11] <- 2.7
+
+## 2. risk measures----------------------
+rate <- seq(0,2,length.out = 1000)
+price <- 100/(1+rate)^5
+plot(rate,price,main = "Price-Rate Curve",type = "l")
