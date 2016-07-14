@@ -92,3 +92,56 @@ y[11] <- 2.7
 rate <- seq(0,2,length.out = 1000)
 price <- 100/(1+rate)^5
 plot(rate,price,main = "Price-Rate Curve",type = "l")
+
+Yield <- function(cashflows,terms,currentprice){
+    obj <- function(r){
+        (sum((1+r)^(-terms)*cashflows)-currentprice)^2
+    }
+    ## minimum .1 basis point
+    round(optim(par=0.02,fn = obj,method = "L-BFGS-B",lower = 0,upper = 1)$par,5)
+}
+
+Duration <- function(cashflows,terms,currentprice,yield=NULL,modified=TRUE){
+    if(is.null(yield)){
+        yield <- Yield(cashflows,terms,currentprice)
+    }
+    if(modified){
+        ## modified duration is the first deritive of price to yield multiply by -1/price
+        ## modified = macaulay / (1+yield)
+        return(sum((1+yield)^(-terms)*cashflows/currentprice*terms)/(1+yield))
+    }else{
+        ## macaulay duration is just the weighted sum of all cashflow terms.
+        ## weights equal the proportion of cashflows' current value to current price.
+        return(sum((1+yield)^(-terms)*cashflows/currentprice*terms))
+    }
+}
+
+DV01 <- function(cashflows,terms,currentprice,yield=NULL,duration=NULL){
+    if(is.null(duration)){
+        duration <- Duration(cashflows,terms,currentprice,yield)
+    }
+    ## DV01=-1/10000*dp/dy=1/1000*duration*p
+    ## 10000 scale to dollar change per basis point
+    duration*currentprice/10000
+}
+
+Convexity <- function(){}
+
+cashflows <- c(rep(7,5),107)
+terms <- 0.3+0:5
+currentprice <- 98.9
+Yield(cashflows,terms,currentprice)
+Duration(cashflows,terms,currentprice)
+DV01(cashflows,terms,currentprice)
+
+## 3. P&L decomposition-----------------
+plot(x,y,xlab = "Term(years)",ylab = "Yield(%)",main = "Yield Curve Roll Down")
+lines(x_inter,MCHS(x,y,x_inter,mono = TRUE),col = "darkorange")
+points(c(27,22),MCHS(x,y,c(27,22),mono = TRUE),pch=20)
+segments(c(22,27),c(0,0),c(22,27),MCHS(x,y,c(22,27)),lty=3)
+points(x=24.5,y=MCHS(x,y,28),pch="←",cex=2)
+text(c(27,22),MCHS(x,y,c(27,22))-0.03,c("27","22"))
+
+
+plot(x,y,type = "l")
+

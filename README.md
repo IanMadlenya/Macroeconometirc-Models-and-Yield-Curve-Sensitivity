@@ -79,21 +79,31 @@ Parigi G, Schlitzer G. Quarterly forecasts of the italian business cycle by mean
 example: a 10000 6-month loan, 10 years forward = a 10000 loan made in 10 ten years for 6 months = the lender give 10000 to the borrower 10 years later,  the brower repay the loan 6 months after the payment(i.e. 10.5 years).
 + **Premium/Discount bond: ** a coupon bond that is trading above/below its par value(when its coupon rate is higher/lower than the **prevailing interest rate**)
 + **Par bond: ** a coupon bond trade at par.
-
++ **Zero coupon bond:** sold at a significant discount to face value and offer no interest payments because they mature at par. **STRIPS**(Separate Trading of Registered Interest and Principal of Securities) is a kind of zero coupon bond issued by US government.
 
 ##### 3.1.1 Types of (<span style="color: darkred">EXPECTED</span>) Yield Curves
 keywords:
 **quote convensions:** spot, forward and par rates
-
-**Curve of discount: ** $d(t)$ gives the present values of one unit of currency to be received at various time t.
+##### <span style="color: darkred">Essential: Law of one price</span>
+<span style="color: darkred">If any of the discount, spot, par or forward curve is known, the other three curves are determined.</span>
++ **Par rate:  <span style="color: steelblue">$c(t)$ is the implied par rates under a given term structure, or a given set of par rates implied(determined) a term structure. When the par rates are known, one gets discount factors by the following equation:</span> **
 $$
-C_{present} = D_{t_1}d(t_1) + D_{t_2}d(t_2) + D_{t_3}d(t_3)+...+ D_{t_n}d(t_n)
+C(t_1)
+Par+Pard(t_1)
 $$
-**Spot rate** is the rate on a **spot** loan, **coumound spot rate is the inverse of d(t)**
++ **Discount factor: ** $d(t)$ gives the present values of one unit of currency to be received at various time t.
+$$
+\begin{align*}
+C_{present} &= D_{t_1}d(t_1) + D_{t_2}d(t_2) + D_{t_3}d(t_3)+...+ D_{t_n}d(t_n) \\
+&=cash\ flow\cdot A(T),
+\end{align*}
+$$
+where $\cdot$ denote dot product(or inner product), $A(T)=d(t_1)+...+d(T)$ denote annuity factor. Each $d(t_i)$ can be easily calculated 
++ **Spot rate** is the rate on a **spot** loan, **coumound spot rate is the inverse of d(t)**
 $$
 r_{spot}= \frac{1}{d(t)^{\frac{1}{t}}}-1
 $$
-**Forward rate** is the rate of a **forward loan**. a 1-period loan, $t-1$ periods forward
++ **Forward rate** is the rate of a **forward loan**. a 1-period loan, $t-1$ periods forward
 $$
 (1+r_{forwrd})=\frac {d_{t-1}} {d_t}
 $$
@@ -101,6 +111,8 @@ $$
 (1+r_{spot})^t=\prod_{i=0}^{t-1} (1+r_{forward_{t-i}})
 $$
 like discount factor, spot rate are calculated ==**recursively**==
+
+
 embedded
 investment horizon
 term in years
@@ -133,17 +145,44 @@ yield to maturity equals par rate when spot price equals par value.
 P&L Decompostion
 #### <span style="color: darkred">**Essential: intermediate term structure**</span>
 
-**Total Price Appreciation** 
-$$P_{t+1}(R_{t+1},S_{t+1})-P_{t}(R_{t},S_{t})$$
+ Let $P_t$ denote the full price of a bond, $p_t$ denote its net price(quoted price), and $AI(t)$ denote its accrued interest, so that $P_t=p_t+AI(t)$. Note that $AI$ only relys on $t$, as long as coupon rate is fixed, **$AI$ is independent of term structure**.
+**Total Appreciation**: 
+$$
+\begin{align*}
+total\ appreciation&=price\ appreciation+cash\ carry \\
+&=carry\ roll\ down+rate\ change+spread\ change+cash\ carry.
+\end{align*}
+$$
+** carry roll down, rate change and spread change are all with respect to <span style="color: darkred">net price</span>.**
+**Cash Carry: ** 
+$$
+\begin{align*}
+{cash\ carry} &={coupon\ income}- {financing\ cost}\\
+&=coupon\ payments+AI(t+1)-AI(t)-financing\ cost\\
+&= (Coupon_{per\ day}-financing\ cost_{per\ day})\times d
+\end{align*}
+$$
+where $d$ denote the number of days between $t$ and $t-1$.
+
+**Price Appreciation** 
+$$p_{t+1}(R_{t+1},S_{t+1})-p_{t}(R_{t},S_{t})$$
 **Roll Down: ** the profit or lose due to the fact that, as a security **matures**, its cash flows are priced at earlier points on the term structure(for example a forward loan or an european option).
-**Cash Carry: ** ${cash\ carry}={coupon\ income}- {financing\ cost}$
-**Carry Roll Down: ** P&L that might otherwise be classified as either carry or roll-down, ${carry\ roll\ down}={P\&L\ due\ to\ the\ passage\ of\ time}-{cash\ carry}$, or the price appreciation due to the bond's maturing over the period and retes moving from the ofiginal term structure $R_t$ to some hypothetical,'expected',or intermediate term structure $R_{t+1}^e$
-$$P_{t+1}(R_{t+1}^e,S_{t})-P_{t}(R_{t},S_{t})$$
+For example, A bond maturer in 27 years is bought at time $t$, after 5 years the bond's maturity becomes 22 years. If the yield curve stays the same, then the **net** price change due to rate rolling down form a longer maturity to a shorter maturity is called "roll down".
+![](./references/roll_down.png)
+**Carry Roll Down: ** P&L that might otherwise be classified as either carry(interest inceome) or roll-down(rate change), carry roll down is the price appreciation due to the bond's maturing over the period and retes moving from the original term structure $R_t$ to some hypothetical,'expected',or intermediate term structure $R_{t+1}^e$
+$$p_{t+1}(R_{t+1}^e,S_{t})-p_{t}(R_{t},S_{t})$$
 **Rate Change**
-$$P_{t+1}(R_{t+1},S_{t})-P_{t}(R_{t+1}^e,S_{t})$$
+$$p_{t+1}(R_{t+1},S_{t})-p_{t+1}(R_{t+1}^e,S_{t})$$
 **Spread Chnage**
-$$P_{t+1}(R_{t+1},S_{t+1})-P_{t}(R_{t+1},S_{t})$$
-<span style="color: steelblue">clearly, **adding carry-roll-down, rate-change and spread-change together will get total-price-appreciation**</span>
+$$p_{t+1}(R_{t+1},S_{t+1})-p_{t+1}(R_{t+1},S_{t})$$
+<span style="color: steelblue">clearly, **adding carry-roll-down, rate-change and spread-change together will get price-appreciation**</span>
+**NOTE:**
+1. $R$ represents a specifiede term structure, when the term sructure is spot curve, the whole curve at $t+1$ will be used in calculating terminal price, when $R$ is yield curve, only the rate roll downed to a corresponding point on the curve will be used.
+2. All the decomposed components of price appreciation are represented by **net prices**, but we can only get **full prices** with a specified term strucutre and spread. note that $P_t=p_t+AI(t)$, and $AI$ is irrevelant to term structure and spread. Replace net prices with full prices and accrued interest will get:
+$carry\ roll\ down= P_{t+1}(R_{t+1}^e,S_{t})-P_{t}(R_{t},S_{t})-AI(t+1)+AI(t),\\
+rate\ change=P_{t+1}(R_{t+1},S_{t})-P_{t+1}(R_{t+1}^e,S_{t}),\\
+spread\ change=P_{t+1}(R_{t+1},S_{t+1})-P_{t+1}(R_{t+1},S_{t}).$
+
 
 spread fixed
 calculate in advance
@@ -203,14 +242,14 @@ D=\sum \frac{P_i}{P}D_i \\
 C=\sum \frac{P_i}{P}C_i
 $$
 
-the reason multiplying a $\frac{1}{(1+y)}$ with $\frac{dP}{dy}$ is to make the $t-1$th power be $t$ aggain, then duration can be seen as a weighted(**weights are determined by the proportion of the cash flows to the total present value**) sum of all the cash folow time duration.
+the reason multiplying a $\frac{1}{(1+y)}$ with $\frac{dP}{dy}$ is to make the $t-1$th power be $t$ again, then duration can be seen as a weighted(**weights are determined by the proportion of the cash flows to the total present value**) sum of all the cash folow time duration.
 $$duration \propto maturity \\
 convexity \propto {maturity}^2 \propto {duration}^2$$
-If barbell portfolio A consists of two bonds with duration $d_1$ and $d_2$, portfolio B is a bullet portfolio with duration $d_3$. from the duration relations between securitie and portfolio, $d_1,d_2,d_3$ satisfy:
+If barbell portfolio A consists of two bonds with duration $d_1$ and $d_2$, portfolio B is a bullet portfolio with duration $d_3$. According to the duration relations between securitie and portfolio, $d_1,d_2,d_3$ satisfy:
 $$
 wd_1+(1-w)d_2=d_3,
 $$
-then it's easy to proof that the following equation must hold:
+It's easy to proof that the following equation must hold:
 $$
 wd_1^2 + (1-w)d_2^2>d_3^2.
 $$
