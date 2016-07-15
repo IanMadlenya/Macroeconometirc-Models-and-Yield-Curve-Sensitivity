@@ -3,8 +3,9 @@ Miscellaneous practical macroeconometric models and tools in analysing yield cur
 
 - - -
 ### 1. Basics
+credit, interest rates, leveraging and deleveraging
+#### 1.1 Interest Rate
 
-#### 1.1 Exchange Rate
 **Interest rate parity:**
 under the assumption of **capital mobility** and **perfect substitutability** of demostic and foreign assets.
 **uncovered:**
@@ -27,6 +28,15 @@ $$
 i_A = i_B + \frac {\Delta E({ER}_{t+k})} {{ER}_t},
 $$
 where $\frac {\Delta E({ER}_{t+k})} {{ER}_t}$ is the expected rete of deprecation of currency $A$.
+
+**Negative interest rate:**
+[Incentive](http://www.investopedia.com/articles/investing/070915/how-negative-interest-rates-work.asp): as the **DEMAND** of a country is low, people and businesses have a tendency to hold on to their cash while they wait for the economy to pick up. But this behavior can serve to weaken the economy further as the lack of spending causes further job losses and lower profits, thus reinforcing people’s fears and giving them even more incentive to **hoard**. As spending slows, prices drop creating another incentive for people to wait as they wait for prices to fall further. This is called a **'deflation spiral'**.
+**Methods:**  large-scale bond-buying programs and negative deposit rates.
+Negative interest rates are a drastic measure that show policymakers are afraid that Europe is at risk of falling into a deflationary spiral.
++ As private sector banks have to pay to central bank(excess reserve) to park their money, negative rates hope to encourage banks to lend more.
++ Central bank charge priate sector banks, also private banks will charge depositors. This will encourage people to save less but lend more.
++ Negative yield on sovereign **financial assets** will deter foreign investors, **weaking demand for local currency(sovereign financial assets are priced and traded with local currency)**. While decrease in currency lowered its value, this will stimulate demand for the export of **non financial assets**, hopefully encourage business to expand.
++ But negative rates may also cause bank to lend less, and deposit holders may withdraw their money and stuff them in mattresses.
 
 ### 2. Macroecomic indicators nowcasting
 Important macroecomic indicatorys like GDP and CPI are always released with a substantial delay. As a matter of fact, many indicators with much more higer frequency made it possible to get a early picture of the evolution fo current economic state. Here are several methods can bridge the gap bewteen timely updated indicators and the delayed natioanal accounts.
@@ -71,6 +81,7 @@ Parigi G, Schlitzer G. Quarterly forecasts of the italian business cycle by mean
 
 
 ### 3. Bond Portfolio Logics
+
 
 #### 3.1 Yield Curve
 
@@ -260,7 +271,10 @@ flatten: shorter-term rates increase by more than longer-term rates, or longer-t
 though graphically the curve may not seen as 'flatten' or 'steepen'.
 
 
-#### 3.2 Profit Sources
+#### 3.2 Bond Pricing
+
+**Callable bonds** can be decomposed into bond and bond's call option, while **puttable bonds** can be decomposed into bond and bond's put option.
+
 ##### 3.2.1 Credit Spread
 ##### 3.3.2 Yield Spread
 
