@@ -302,3 +302,5 @@ $$
 Eventually, conditions above constitute $n+1$ linear euqations with $n+1$ unkonwn varibles.
 **[Monotonic Hermit Spline](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation)**
 As to Monotonic Hermit Spline, the conditions needed to find $k_i$s are a little different, for the constrains on second derivitives may not hold under monotonic condition. It is needed to specify all the tangents **manually**.
+
+#### Chinese Land Price and Economy
