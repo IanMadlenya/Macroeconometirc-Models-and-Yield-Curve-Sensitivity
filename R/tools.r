@@ -13,8 +13,11 @@ LI <- function(x,y,x_inter=x){
 ## cubic spline
 CS <- function(){}
 ## (monotonic) cubic (hermit) spline
-MCHS <- function(x,y,x_inter=x,mono=FALSE){
+MCHS <- function(x,y,x_inter=NULL,mono=FALSE){
     n <- length(x)-1                    #number of splines
+    if(is.null(x_inter)){
+        x_inter <- seq(from = first(x),to = last(x),length.out = 1000)
+    }
     if(mono){
         ## reference: wiki
         ## 1
@@ -133,6 +136,19 @@ currentprice <- 98.9
 Yield(cashflows,terms,currentprice)
 Duration(cashflows,terms,currentprice)
 DV01(cashflows,terms,currentprice)
+
+## real yieldcurve interpolation
+load("data/YieldCurve_EXcorporate")
+
+x <- as.numeric(colnames(yc))
+y <- as.numeric(yc[1,])
+MCHS(x,y,mono=TRUE)
+plot(x,y,xlab = "Term(years)",ylab = "Yield(%)",main = "Coporate Bond Yields")
+lines(x_inter,LI(x,y,x_inter),lty=3)
+lines(x_inter,MCHS(x,y,x_inter),col = "steelblue")
+lines(x_inter,MCHS(x,y,x_inter,mono = TRUE),col = "darkorange")
+
+
 
 ## 3. P&L decomposition-----------------
 plot(x,y,xlab = "Term(years)",ylab = "Yield(%)",main = "Yield Curve Roll Down")
