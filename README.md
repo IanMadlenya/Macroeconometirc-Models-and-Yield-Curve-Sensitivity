@@ -97,11 +97,15 @@ keywords:
 **quote convensions:** spot, forward and par rates
 ##### <span style="color: darkred">Essential: Law of one price</span>
 <span style="color: darkred">If any of the discount, spot, par or forward curve is known, the other three curves are determined.</span>
-+ **Par rate:  <span style="color: steelblue">$c(t)$ is the implied par rates under a given term structure, or a given set of par rates implied(determined) a term structure. When the par rates are known, one gets discount factors by the following equation:</span> **
++ **Par rate:  <span style="color: steelblue">$r_{par}(t)$ is the implied par rates under a given term structure, or a given set of par rates implied(determined) a term structure. Par rate is the implied coupon rate if all bonds are trade at par(but not their current price). If any of the Par rates or discount factors are konwn, the other can be determined by the following equation:</span> **
 $$
-C(t_1)
-Par+Pard(t_1)
+r_{par}(T) \times Par \times A(T)+Par \times d(T) = Par
 $$
+devied Par on both sides:
+$$
+r_{par}(T) \times A(T)+d(T) = 1
+$$
+**Because the fixed leg of IRS is the same with a par bond, IRS rate are always take as the real par rates.**
 + **Discount factor: ** $d(t)$ gives the present values of one unit of currency to be received at various time t.
 $$
 \begin{align*}
