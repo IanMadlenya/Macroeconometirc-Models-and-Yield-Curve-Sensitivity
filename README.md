@@ -105,7 +105,7 @@ devied Par on both sides:
 $$
 r_{par}(T) \times A(T)+d(T) = 1
 $$
-**Because the fixed leg of IRS is the same with a par bond, IRS rate are always take as the real par rates.**
+**Because the fixed leg of IRS is the same with a par bond, IRS rate are always taken as the real par rates.**
 + **Discount factor: ** $d(t)$ gives the present values of one unit of currency to be received at various time t.
 $$
 \begin{align*}
@@ -125,7 +125,7 @@ $$
 $$
 (1+r_{spot})^t=\prod_{i=0}^{t-1} (1+r_{forward_{t-i}})
 $$
-like discount factor, spot rate are calculated ==**recursively**==
+like discount factor, spot rates are calculated ==**recursively**==
 
 
 embedded

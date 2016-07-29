@@ -1,4 +1,4 @@
-## 1.interpolation----------------------
+## 1. Interpolation----------------------
 
 ## linear interpolation
 LI <- function(x,y,x_inter=x){
@@ -91,7 +91,7 @@ legend(x=35,y=2.5,legend = c("origin","linear","cubic","monotonic"),pch = c(1,NA
 
 y[11] <- 2.7
 
-## 2. risk measures----------------------
+## 2. Risk Measures----------------------
 rate <- seq(0,2,length.out = 1000)
 price <- 100/(1+rate)^5
 plot(rate,price,main = "Price-Rate Curve",type = "l")
@@ -159,3 +159,62 @@ text(c(27,22),MCHS(x,y,c(27,22))-0.03,c("27","22"))
 
 plot(x,y,type = "l")
 
+## 4. Bond pricing----------------------
+
+## Black-Scholes formula
+## S, K, T, r and sigma denote security price, strike price, term(years), money market annulized continuous rate and annulized volatility respectively
+BS <- function(S,K,T,r,sigma=NULL){
+    if(is.null(sigma)){
+        if(length(S)==1){stop("'S' must contain more than two entries when 'sigma' is NULL!")}
+        sigma <- sd(diff(log(S)))
+    }
+    S <- last(S)
+    d1 <- (log(S/K)+(r+sigma^2/2)*T)/sigma/sqrt(T)
+    d2 <- d1-sigma*sqrt(T)
+    S*pnorm(d1)-K*exp(-r*T)*pnorm(d2)
+}
+
+S <- rnorm(50)+100
+K <- last(S)
+T <- 1
+r <- 0.02
+BS(S,K,T,r)
+
+## Black's Model
+## current price = sum(c(intermediate cashflows, forward price)*c(corresponding discount factors))
+## S: bond full price
+## cashflows: c(intermediate cashflows, strike price)
+## terms: c(terms of intermediate cashflows, term of the option)
+## rates: continuous spot rates corresponding to terms
+## r: money market rate corresponding to the term of the option
+## sigma <- sd(diff(log(clean price)))
+BM <- function(S,cashflows,terms,rates,sigma){
+    L <- length(cashflows)
+    F <- (S-sum(exp(-terms[-L]*rates[-L])*cashflows[-L]))/exp(-rates[L]*terms[L]) #forward price
+    
+    d1 <- (log(F/cashflows[L])+sigma^2*terms[L]/2)/sigma/sqrt(terms[L])
+    d2 <- d1-sigma*sqrt(terms[L])
+    c(call=(F*pnorm(d1)-cashflows[L]*pnorm(d2))*exp(-rates[L]*terms[L]),
+      put=(cashflows[L]*pnorm(-d2)-F*pnorm(-d1))*exp(-rates[L]*terms[L]))
+}
+
+BM(S=960,cashflows = c(50,50,1000),terms = c(0.25,0.75,0.8333),rates = c(0.09,0.095,0.1),sigma = 0.09)
+cashflows,terms,currentprice
+
+## Black's model applied in callable/putable bond
+## S: clean prices
+## sigma <- sd(diff(log(clean price)))
+BM_cpb <- function(S,cashflows,terms,rates){
+    if(is.null(sigma)){
+        if(length(S)<=1){stop("'S' must contain more than two entries when 'sigma' is NULL!")}
+        
+    }
+    S <- last(S)                        #current price
+    L <- length(cashflows)
+    F <- (S-sum(exp(-terms[-L]*rates[-L])*cashflows[-L]))/exp(-rates[L]*terms[L]) #forward price
+    
+    d1 <- (log(F/cashflows[L])+sigma^2*terms[L]/2)/sigma/sqrt(terms[L])
+    d2 <- d1-sigma*sqrt(terms[L])
+    c(call=(F*pnorm(d1)-cashflows[L]*pnorm(d2))*exp(-rates[L]*terms[L]),
+      put=(cashflows[L]*pnorm(-d2)-F*pnorm(-d1))*exp(-rates[L]*terms[L]))
+}
