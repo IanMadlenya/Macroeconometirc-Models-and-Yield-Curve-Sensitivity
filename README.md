@@ -277,7 +277,17 @@ though graphically the curve may not seen as 'flatten' or 'steepen'.
 
 #### 3.2 Bond Pricing
 
-**Callable bonds** can be decomposed into bond and bond's call option, while **puttable bonds** can be decomposed into bond and bond's put option.
+**Callable bonds** can be seen as a portfolio of long a regular bond and short a call option, while **puttable bonds** can be seen as long a regular bond long a put option.
+then we have:
+$$
+\begin{align*}
+& bond\ price + gain\ from\ short\ a\ call\ option  = current\ price\ of\ a\ callable\ bond \\
+&=> bond\ price = current\ price-call\ {option}'s\ price \\
+\\
+&bond\ price + loss\ from\ long\ a\ put\ option  = current\ price\ of\ a\ puttable\ bond\\
+&=> bond\ price = current\ price+put\ {option}'s\ price \\
+\end{align*}
+$$
 
 ##### 3.2.1 Credit Spread
 ##### 3.3.2 Yield Spread

@@ -199,22 +199,30 @@ BM <- function(S,cashflows,terms,rates,sigma){
 }
 
 BM(S=960,cashflows = c(50,50,1000),terms = c(0.25,0.75,0.8333),rates = c(0.09,0.095,0.1),sigma = 0.09)
-cashflows,terms,currentprice
 
 ## Black's model applied in callable/putable bond
-## S: clean prices
+## S: current full price
 ## sigma <- sd(diff(log(clean price)))
-BM_cpb <- function(S,cashflows,terms,rates){
-    if(is.null(sigma)){
-        if(length(S)<=1){stop("'S' must contain more than two entries when 'sigma' is NULL!")}
-        
-    }
-    S <- last(S)                        #current price
+BM_cp <- function(S,cashflows,terms,rates,sigma,optiontype="call",lower=50,upper=150){
+
     L <- length(cashflows)
-    F <- (S-sum(exp(-terms[-L]*rates[-L])*cashflows[-L]))/exp(-rates[L]*terms[L]) #forward price
     
-    d1 <- (log(F/cashflows[L])+sigma^2*terms[L]/2)/sigma/sqrt(terms[L])
-    d2 <- d1-sigma*sqrt(terms[L])
-    c(call=(F*pnorm(d1)-cashflows[L]*pnorm(d2))*exp(-rates[L]*terms[L]),
-      put=(cashflows[L]*pnorm(-d2)-F*pnorm(-d1))*exp(-rates[L]*terms[L]))
+    obj <- function(X){
+        F <- (X-sum(exp(-terms[-L]*rates[-L])*cashflows[-L]))/exp(-rates[L]*terms[L]) #forward price
+        d1 <- (log(F/cashflows[L])+sigma^2*terms[L]/2)/sigma/sqrt(terms[L])
+        d2 <- d1-sigma*sqrt(terms[L])
+        if(optiontype=="call"){
+            abs(S-X-(F*pnorm(d1)-cashflows[L]*pnorm(d2))*exp(-rates[L]*terms[L]))
+        }else if(optiontype=="put"){
+            abs(S-X+(cashflows[L]*pnorm(-d2)-F*pnorm(-d1))*exp(-rates[L]*terms[L]))
+        }else{
+            0
+        }
+    }
+    ## minimum .1 basis point
+    round(optim(par=S,fn = obj,method = "L-BFGS-B",lower = lower,upper = upper)$par,3)
+
 }
+
+BM_cp(S=96,cashflows = c(5,5,100),terms = c(0.25,0.75,0.8333),rates = c(0.09,0.095,0.1),sigma = 0.04,optiontype = "call")
+BM_cp(S=96,cashflows = c(5,5,100),terms = c(0.25,0.75,0.8333),rates = c(0.09,0.095,0.1),sigma = 0.04,optiontype = "put")
