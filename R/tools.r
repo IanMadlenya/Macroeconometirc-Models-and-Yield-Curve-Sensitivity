@@ -13,7 +13,8 @@ LI <- function(x,y,x_inter=x){
 ## cubic spline
 CS <- function(){}
 ## (monotonic) cubic (hermit) spline
-MCHS <- function(x,y,x_inter=NULL,mono=FALSE){
+MCHS <- function(x,y,x_inter=NULL,mono=FALSE,returnfunction=FALSE){
+    ## return interpolation function if returnfunction=TRUE
     n <- length(x)-1                    #number of splines
     if(is.null(x_inter)){
         x_inter <- seq(from = first(x),to = last(x),length.out = 1000)
@@ -67,13 +68,26 @@ MCHS <- function(x,y,x_inter=NULL,mono=FALSE){
         P4 <- (x-xp)^3/(xa-xp)^2 - (x-xp)^2/(xa-xp)
         yp*P1+ya*P2+kp*P3+ka*P4
     }
-    sapply(x_inter,function(i){
+    ## 'substitude' will substitude variables with their evaluation expressions as well, so here use 'expression' instead.
+    expr <- expression(sapply(x_inter,function(i){
         idx <- Position(function(x){i>=x},x,right = TRUE)
         interpolation(xp=x[idx],xa=x[idx+1],
                       yp=y[idx],ya=y[idx+1],
                       kp=k[idx],ka=k[idx+1],
                       x=i)
-    })
+    }))
+    if(!returnfunction){
+        return(eval(expr))
+    }else{
+        ## return interpolation function
+        return(eval(parse(text=c(
+                  "function(x_inter){",
+                  "x=",deparse(x),
+                  "y=",deparse(y),
+                  "interpolation=",deparse(interpolation),
+                  as.character(expr),
+                  "}"))))
+    }
 }
 
 

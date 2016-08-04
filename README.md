@@ -1,6 +1,8 @@
 # Macroeconometirc-Models-and-Yield-Curve-Sensitivity
 Miscellaneous practical macroeconometric models and tools in analysing yield curve.
 
+[TOC "float:left"]
+
 - - -
 ### 1. Basics
 credit, interest rates, leveraging and deleveraging
@@ -211,8 +213,8 @@ Yield curve can be decomposed in to several interest rate factors, these factors
 
 #### <span style="color: darkred">**Essential: price-rate curve**</span>
 ![](./references/price_rate_curve.png)
-convex: straight line lies above the curve.
-concave: stratght line lies below the curve.
+convex: straight line lies below the curve.
+concave: stratght line lies above the curve.
 **01** represents .01%, i.e. one basis point. (DV01, key-rates 01, ...)
 
 ##### Single risk factor
